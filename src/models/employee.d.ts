@@ -5,9 +5,3 @@ type Employee = {
     featured: boolean
     createdAt: string
 }
-
-type EmployeeJob = {
-    id: number,
-    employeeId: number,
-    jobId: number
-}

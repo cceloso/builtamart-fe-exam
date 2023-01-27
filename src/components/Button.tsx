@@ -25,7 +25,11 @@ const Button = (props: ButtonProps) => {
     }
 
     return (
-        <button onClick={props.onClick} className={`rounded-md px-3 py-1 disabled:opacity-75 transition duration:300 ${styles}`} disabled={props.disabled ? props.disabled : false}>
+        <button
+            onClick={props.onClick}
+            className={`rounded-md px-3 py-1 disabled:opacity-75 transition duration:300 ${styles}`}
+            disabled={props.disabled ? props.disabled : false}
+        >
             {props.label}
         </button>
     )
