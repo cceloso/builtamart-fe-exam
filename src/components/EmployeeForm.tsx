@@ -23,7 +23,7 @@ const EmployeeForm = (props: EmployeeFormProps) => {
                 name: name,
                 photo: photo,
                 featured: isFeatured,
-                created_at: Date.now()
+                createdAt: new Date()
             })
             .then((res) => {
                 console.log(res)
@@ -41,9 +41,8 @@ const EmployeeForm = (props: EmployeeFormProps) => {
             axios.put(`${import.meta.env.VITE_API_URL}/employees/${props.employee?.id}`, {
                 name: name,
                 photo: photo,
-                jobs: props.employee?.jobs,
                 featured: isFeatured,
-                created_at: props.employee?.created_at
+                createdAt: props.employee?.createdAt
             })
             .then((res) => {
                 console.log(res)

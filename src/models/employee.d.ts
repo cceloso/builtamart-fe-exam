@@ -3,7 +3,7 @@ type Employee = {
     name: string
     photo: string
     featured: boolean
-    created_at: string
+    createdAt: string
 }
 
 type EmployeeJob = {

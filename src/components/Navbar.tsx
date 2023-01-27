@@ -12,6 +12,7 @@ const Navbar = () => {
             </Link>
             <nav>
                 <ul className="flex">
+                    <NavLink label="Home" link="/" />
                     <NavLink label="Employees" link="/employees" />
                     <NavLink label="Jobs" link="/jobs" />
                 </ul>
