@@ -9,21 +9,21 @@
     },
     {
       "name": "Maria Dela Cruz",
-      "photo": "https://www.newbalance.com.sg/dw/image/v2/AASX_PRD/on/demandware.static/-/Library-Sites-APAC/default/dw646c4c25/Greyday_IU_Hero_0510.jpg",
-      "featured": false,
+      "photo": "https://www.newbalance.com.sg/dw/image/v2/AASX_PRD/on/demandware.static/-/Library-Sites-APAC/default/dw6442676a/IU_Campaign_Updates/IU_10_T_PC.jpg",
+      "featured": true,
       "createdAt": "2023-01-27T08:07:46.048Z",
       "id": 2
     },
     {
       "name": "Oldest Employee",
-      "photo": "https://www.newbalance.com.sg/dw/image/v2/AASX_PRD/on/demandware.static/-/Library-Sites-APAC/default/dw646c4c25/Greyday_IU_Hero_0510.jpg",
+      "photo": "https://www.newbalance.com.sg/dw/image/v2/AASX_PRD/on/demandware.static/-/Library-Sites-APAC/default/dw8f4d94db/IU_Campaign_Updates/IU_2_J_PC.jpg",
       "featured": true,
       "createdAt": "2023-01-26T08:07:46.048Z",
       "id": 3
     },
     {
       "name": "2nd Oldest Employee",
-      "photo": "https://www.newbalance.com.sg/dw/image/v2/AASX_PRD/on/demandware.static/-/Library-Sites-APAC/default/dw646c4c25/Greyday_IU_Hero_0510.jpg",
+      "photo": "https://www.newbalance.com.sg/dw/image/v2/AASX_PRD/on/demandware.static/-/Library-Sites-APAC/default/dwb54d3b6b/IU_Campaign_Updates/IU_5_J_PC.jpg",
       "featured": false,
       "createdAt": "2023-01-26T18:07:46.048Z",
       "id": 4
@@ -53,6 +53,21 @@
       "employeeId": 2,
       "jobId": 2,
       "id": 2
+    },
+    {
+      "employeeId": 3,
+      "jobId": 3,
+      "id": 3
+    },
+    {
+      "employeeId": 4,
+      "jobId": 2,
+      "id": 4
+    },
+    {
+      "employeeId": 4,
+      "jobId": 1,
+      "id": 5
     }
   ]
 }

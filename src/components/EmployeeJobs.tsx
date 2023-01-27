@@ -38,7 +38,7 @@ const EmployeeJobs = ({ id }: { id: number }) => {
     return (
         <div>
             {employeeJobs.map((job) => (
-                <p className="text-sm truncate w-72">{job.name}</p>
+                <p className="text-sm truncate w-72" key={job.id}>{job.name}</p>
             ))}
         </div>
     )

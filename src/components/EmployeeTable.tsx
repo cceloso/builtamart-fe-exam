@@ -77,20 +77,20 @@ const EmployeeTable = () => {
                 <tbody>
                     {data.map((employee: Employee) => (
                         <tr className="border-b-2 border-gray-100 border-separate" key={employee.id}>
-                            <td className="px-4 py-6">{employee.id}</td>
-                            <td className="px-4 py-6 flex gap-6 items-center">
-                                <img className="w-[50px] h-[50px] rounded-full object-cover" src={employee.photo} alt={employee.name} />
+                            <td className="px-4 py-5">{employee.id}</td>
+                            <td className="px-4 py-5 flex gap-6 items-center">
+                                <img className="w-[60px] h-[60px] rounded-full object-cover" src={employee.photo} alt={employee.name} />
                                 <span>
                                     {employee.name}
                                 </span>
                             </td>
-                            <td className="px-4 py-6">
+                            <td className="px-4 py-5">
                                 <Button label="Jobs" onClick={() => assignHandler(employee)} />
                             </td>
-                            <td className="px-4 py-6">
+                            <td className="px-4 py-5">
                                 <Button label="Edit" onClick={() => editHandler(employee)} />
                             </td>
-                            <td className="px-4 py-6">
+                            <td className="px-4 py-5">
                                 <Button label="Delete" onClick={() => deleteHandler(employee)} />
                             </td>
                         </tr>

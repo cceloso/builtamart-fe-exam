@@ -68,13 +68,13 @@ const JobTable = () => {
                 <tbody>
                     {jobs.map((job: Job) => (
                         <tr className="border-b-2 border-gray-100 border-separate" key={job.id}>
-                            <td className="px-4 py-6">{job.id}</td>
-                            <td className="px-4 py-6">{job.name}</td>
-                            <td className="px-4 py-6">{employeeJobs.filter((employeeJob) => employeeJob.jobId === job.id).length}</td>
-                            <td className="px-4 py-6">
+                            <td className="px-4 py-5">{job.id}</td>
+                            <td className="px-4 py-5">{job.name}</td>
+                            <td className="px-4 py-5">{employeeJobs.filter((employeeJob) => employeeJob.jobId === job.id).length}</td>
+                            <td className="px-4 py-5">
                                 <Button label="Edit" onClick={() => editHandler(job)} />
                             </td>
-                            <td className="px-4 py-6">
+                            <td className="px-4 py-5">
                                 <Button label="Delete" onClick={() => deleteHandler(job)} disabled={employeeJobs.filter((employeeJob) => employeeJob.jobId === job.id).length > 0} />
                             </td>
                         </tr>
