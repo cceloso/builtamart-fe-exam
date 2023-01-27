@@ -16,7 +16,7 @@ const Slideshow = (props: SlideshowProps) => {
         setCurrentIndex(newIndex)
     }
 
-    const slideRight = () => {
+    const moveToNextSlide = () => {
         const isLastSlide = currentIndex === props.photos.length - 1
         const newIndex = isLastSlide ? 0 : currentIndex + 1
         setCurrentIndex(newIndex)
@@ -24,7 +24,7 @@ const Slideshow = (props: SlideshowProps) => {
 
     const startSlideshow = () => {
         timer.current = setInterval(() => {
-            slideRight()
+            moveToNextSlide()
             props.onHover(-1)
         }, 5000)
     }

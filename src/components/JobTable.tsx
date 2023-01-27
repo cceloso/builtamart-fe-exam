@@ -6,7 +6,7 @@ import Modal from "./Modal"
 import { getJobs, deleteJob } from "../services/job.service"
 import { getEmployeeJobs } from "../services/employeeJob.service"
 import Spinner from "./Spinner"
-import ErrorMessage from "./ErrorMessage"
+import { ExclamationCircleIcon } from "@heroicons/react/24/solid"
 
 const JobTable = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -65,7 +65,13 @@ const JobTable = () => {
 
             {isLoading && <Spinner />}
 
-            {isError && <ErrorMessage />}
+            {isError &&
+                <div className="flex flex-col items-center justify-center text-center text-dark-charcoal">
+                    <ExclamationCircleIcon className="w-24" />
+                    <h1 className="font-bold text-2xl my-4">Oops! Something went wrong.</h1>
+                    <p>An error occured while loading this information. Please reload the page or try again later.</p>
+                </div>
+            }
 
             {jobs && employeeJobs &&
                 <div className="overflow-auto">

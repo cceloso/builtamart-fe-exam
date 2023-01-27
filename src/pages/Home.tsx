@@ -1,8 +1,8 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
 import Container from "../components/Container"
 import EmployeeList from "../components/EmployeeList"
 import Slideshow from "../components/Slideshow"
+import { getEmployees } from "../services/employee.service"
 
 const Home = () => {
     const [featuredEmployeeIds, setFeaturedEmployeeIds] = useState<any[]>([])
@@ -11,27 +11,19 @@ const Home = () => {
     const [hoveredPhotoIndex, setHoveredPhotoIndex] = useState<number>(-1)
 
     useEffect(() => {
-        const getEmployees = async () => {
-            try {
-                const res = await axios.get(`${import.meta.env.VITE_API_URL}/employees`)
-                const employees: Employee[] = res.data
-
-                let featured = employees.filter((employee) => employee.featured === true)
-                let featuredIds = featured.map((employee) => employee.id)
-                let featuredPhotos = featured.map((employee) => employee.photo)
-                
-                console.log(`featured: ${featured}`)
-                setFeaturedEmployeeIds(featuredIds)
-                setFeaturedEmployeePhotos(featuredPhotos)
-                
-                const sorted = employees.sort((a, b) => new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf())
-                setSortedEmployees(sorted)
-            } catch (err) {
-                console.error(err)
-            }
+        const fetchData = async () => {
+            const employees: Employee[] = await getEmployees()
+            const featured = employees.filter((employee) => employee.featured === true)
+            const featuredIds = featured.map((employee) => employee.id)
+            const featuredPhotos = featured.map((employee) => employee.photo)
+            const sorted = employees.sort((a, b) => new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf())
+            
+            setFeaturedEmployeeIds(featuredIds)
+            setFeaturedEmployeePhotos(featuredPhotos)
+            setSortedEmployees(sorted)
         }
 
-        getEmployees()
+        fetchData()
     }, [])
 
     return (

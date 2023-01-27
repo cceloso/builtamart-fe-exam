@@ -1,43 +1,30 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
+import { getEmployeeJob } from "../services/employeeJob.service"
+import { getJobs } from "../services/job.service"
 
 interface EmployeeJobsProps {
     id: number
 }
 
-const EmployeeJobs = ({ id }: { id: number }) => {
+const EmployeeJobs = (props: EmployeeJobsProps) => {
     const [employeeJobs, setEmployeeJobs] = useState<Job[]>([])
 
-    const getEmployeeJobs = async ()=> {
-        try {
-            let res = await axios.get(`${import.meta.env.VITE_API_URL}/employeeJobs?employeeId=${id}`)
-            const employeeJobs: EmployeeJob[] = res.data
-            console.log(`employeeJobs: ${employeeJobs}`)
-
-            const jobIds = employeeJobs.map((job) => job.jobId)
-            console.log(`jobIds: ${jobIds}`)
-
-            res = await axios.get(`${import.meta.env.VITE_API_URL}/jobs`)
-            const jobs: Job[] = res.data
-            console.log(`jobs: ${jobs}`)
-
-            const filteredJobs = jobs.filter((job) => jobIds.includes(job.id))
-
-            console.log(`filtered jobs ${id}: ${filteredJobs}`)
-            setEmployeeJobs(filteredJobs)
-        } catch (err) {
-            console.error(err)
-            return null
-        }
-    }
-
     useEffect(() => {
-        getEmployeeJobs()
-    }, [id])
+        const fetchData = async () => {
+            const employeeJobs: EmployeeJob[] = await getEmployeeJob(props.id)
+            const jobs: Job[] = await getJobs()
+            const employeeJobIds = employeeJobs.map((job) => job.jobId)
+            const filteredJobs = jobs.filter((job) => employeeJobIds.includes(job.id))
+
+            setEmployeeJobs(filteredJobs)
+        }
+
+        fetchData()
+    }, [props.id])
 
     return (
         <div>
-            {employeeJobs.map((job) => (
+            {employeeJobs && employeeJobs.map((job) => (
                 <p className="text-sm truncate w-72" key={job.id}>{job.name}</p>
             ))}
         </div>

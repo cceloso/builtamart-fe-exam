@@ -2,6 +2,7 @@ import { Switch } from "@headlessui/react"
 import { useEffect, useState } from "react"
 import { addEmployeeJob, deleteEmployeeJob, getEmployeeJob } from "../services/employeeJob.service"
 import { getJobs } from "../services/job.service"
+import ErrorMessage from "./ErrorMessage"
 import Spinner from "./Spinner"
 
 interface AssignJobsFormProps {
@@ -74,11 +75,7 @@ const AssignJobsForm = (props: AssignJobsFormProps) => {
 
             {isLoading && <Spinner />}
 
-            {isError &&
-                <div className="text-center">
-                    <p>There was a problem in loading jobs. Please try again.</p>
-                </div>
-            }
+            {isError && <ErrorMessage message="There was an error in loading jobs. Please try again." />}
             
             {jobs && employeeJobs && 
                 jobs.map((job: Job) => (

@@ -1,12 +1,13 @@
+
+import { Dialog } from '@headlessui/react'
+import { XMarkIcon } from "@heroicons/react/24/outline"
+
 interface ModalProps {
     open: boolean
     onClose: () => void
     title: string
     children?: React.ReactNode
 }
-
-import { Dialog } from '@headlessui/react'
-import { XMarkIcon } from "@heroicons/react/24/outline"
 
 const Modal = (props: ModalProps) => {
     return (
@@ -15,10 +16,9 @@ const Modal = (props: ModalProps) => {
             <div className="fixed inset-0 flex items-center justify-center p-4">
                 <Dialog.Panel className="w-full max-w-sm rounded bg-white border-2 border-gray-200 flex flex-col justify-center p-6">
                     <Dialog.Title className="font-bold text-lg mb-4 flex items-center justify-between">
-                        <div>{props.title}</div>
+                        <h1>{props.title}</h1>
                         <XMarkIcon className="w-6" role="button" onClick={props.onClose} />
                     </Dialog.Title>
-
                     {props.children}
                 </Dialog.Panel>
             </div>

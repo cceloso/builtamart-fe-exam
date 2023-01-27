@@ -1,54 +1,64 @@
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import useFetch from "../hooks/useFetch"
+import { deleteEmployee, getEmployees } from "../services/employee.service"
 import AssignJobsForm from "./AssignJobsForm"
 import Button from "./Button"
 import DeleteForm from "./DeleteForm"
 import EmployeeForm from "./EmployeeForm"
+import ErrorMessage from "./ErrorMessage"
 import Modal from "./Modal"
+import Spinner from "./Spinner"
 
 const EmployeeTable = () => {
+    const [isLoading, setIsLoading] = useState(false)
+    const [isError, setIsError] = useState(false)
+    const [employees, setEmployees] = useState<Employee[]>([])
     const [isEditModalOpen, setIsEditModalOpen] = useState(false)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [isJobsModalOpen, setIsJobsModalOpen] = useState(false)
     const [employeeToEdit, setEmployeeToEdit] = useState<Employee>({} as Employee)
 
     const assignHandler = (employee: Employee) => {
-        console.log("ASSIGN!")
         setEmployeeToEdit(employee)
         setIsJobsModalOpen(true)
     }
 
     const editHandler = (employee: Employee) => {
-        console.log("EDIT!")
         setEmployeeToEdit(employee)
         setIsEditModalOpen(true)
     }
     
     const deleteHandler = (employee: Employee) => {
-        console.log("DELETE")
         setEmployeeToEdit(employee)
         setIsDeleteModalOpen(true)
     }
     
-    const deleteEmployee = (id: number) => {
-        axios.delete(`${import.meta.env.VITE_API_URL}/employees/${id}`)
-        .then((res) => {
-            console.log("deleted")
+    const deleteEmployeeHelper = async (id: number) => {
+        const res = await deleteEmployee(id)
+
+        if (res) {
             window.location.reload()
-        })
-        .catch((err: Error) => {
-            console.log(err)
-        })
+        }
     }
 
-    const { loading, data, error } = useFetch(`${import.meta.env.VITE_API_URL}/employees`)
+    useEffect(() => {
+        const fetchData = async () => {
+            setIsLoading(true)
 
-    if (loading) {
-        console.log("loading...")
-    } else if (error) {
-        console.log(error)
-    }
+            const employeesData = await getEmployees()
+
+            if (employeesData) {
+                setEmployees(employeesData)
+            } else {
+                setIsError(true)
+            }
+
+            setIsLoading(false)
+        }
+
+        fetchData()
+    }, [])
 
     return (
         <>
@@ -61,7 +71,7 @@ const EmployeeTable = () => {
             </Modal>
             
             <Modal open={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} title="Delete Employee">
-                <DeleteForm type="employee" onClose={() => setIsDeleteModalOpen(false)} onDelete={() => deleteEmployee(employeeToEdit.id)} />
+                <DeleteForm type="employee" onClose={() => setIsDeleteModalOpen(false)} onDelete={() => deleteEmployeeHelper(employeeToEdit.id)} />
             </Modal>
 
             <div className="overflow-auto">
@@ -76,12 +86,12 @@ const EmployeeTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((employee: Employee) => (
+                        {employees.map((employee: Employee) => (
                             <tr className="border-b-2 border-gray-100 border-separate" key={employee.id}>
                                 <td className="px-4 py-5">{employee.id}</td>
                                 <td className="mr-6 md:mr-0 px-4 py-5 flex gap-6 items-center">
-                                    <img className="w-[40px] h-[40px] lg:w-[60px] lg:h-[60px] rounded-full object-cover truncate w-72" src={employee.photo} alt={employee.name} />
-                                    <span>
+                                    <img className="w-[40px] h-[40px] lg:w-[60px] lg:h-[60px] rounded-full object-cover" src={employee.photo} alt={employee.name} />
+                                    <span className="truncate w-72">
                                         {employee.name}
                                     </span>
                                 </td>
@@ -98,6 +108,12 @@ const EmployeeTable = () => {
                         ))}
                     </tbody>
                 </table>
+
+                {isLoading && <Spinner />}
+
+                {isError && <ErrorMessage message="There was an error in loading employees. Please try again." />}
+                    
+                    
             </div>
         </>
     )
