@@ -53,7 +53,7 @@ const AssignJobsForm = (props: AssignJobsFormProps) => {
     
     return (
         <>
-            <h2 className="font-semibold mb-4">Employee: {props.employee?.name}</h2>
+            <h2 className="font-semibold mb-4 truncate">Name: {props.employee?.name}</h2>
             {jobs.map((job: Job) => (
                 <div className="flex items-center justify-between mb-4">
                     <p className="overflow-hidden truncate w-64">{job.name}</p>

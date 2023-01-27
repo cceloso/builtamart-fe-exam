@@ -55,32 +55,34 @@ const JobTable = () => {
                 <DeleteForm type="employee" onClose={() => setIsDeleteModalOpen(false)} onDelete={() => deleteJob(jobToEdit.id)} />
             </Modal>
 
-            <table className="table-auto overflow-scroll md:w-full">
-                <thead className="bg-gray-50 border-b-2 border-gray-100 border-separate">
-                    <tr className="text-left">
-                        <th className="p-4">ID</th>
-                        <th className="p-4">Name</th>
-                        <th className="p-4">Total Count of Employees With This Job</th>
-                        <th className="p-4">Edit</th>
-                        <th className="p-4">Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {jobs.map((job: Job) => (
-                        <tr className="border-b-2 border-gray-100 border-separate" key={job.id}>
-                            <td className="px-4 py-5">{job.id}</td>
-                            <td className="px-4 py-5">{job.name}</td>
-                            <td className="px-4 py-5">{employeeJobs.filter((employeeJob) => employeeJob.jobId === job.id).length}</td>
-                            <td className="px-4 py-5">
-                                <Button label="Edit" onClick={() => editHandler(job)} />
-                            </td>
-                            <td className="px-4 py-5">
-                                <Button label="Delete" onClick={() => deleteHandler(job)} disabled={employeeJobs.filter((employeeJob) => employeeJob.jobId === job.id).length > 0} />
-                            </td>
+            <div className="overflow-auto">
+                <table className="table-auto overflow-scroll md:w-full">
+                    <thead className="bg-gray-50 border-b-2 border-gray-100 border-separate">
+                        <tr className="text-left">
+                            <th className="p-4">ID</th>
+                            <th className="p-4">Name</th>
+                            <th className="p-4">Total Count of Employees</th>
+                            <th className="p-4">Edit</th>
+                            <th className="p-4">Delete</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {jobs.map((job: Job) => (
+                            <tr className="border-b-2 border-gray-100 border-separate" key={job.id}>
+                                <td className="px-4 py-5">{job.id}</td>
+                                <td className="px-4 py-5">{job.name}</td>
+                                <td className="px-4 py-5">{employeeJobs.filter((employeeJob) => employeeJob.jobId === job.id).length}</td>
+                                <td className="px-4 py-5">
+                                    <Button label="Edit" onClick={() => editHandler(job)} />
+                                </td>
+                                <td className="px-4 py-5">
+                                    <Button label="Delete" onClick={() => deleteHandler(job)} disabled={employeeJobs.filter((employeeJob) => employeeJob.jobId === job.id).length > 0} />
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </>
     )
 }

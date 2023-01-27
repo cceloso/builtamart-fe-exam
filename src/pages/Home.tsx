@@ -35,7 +35,7 @@ const Home = () => {
     }, [])
 
     return (
-        <Container>
+        <Container styles="mb-12">
             <Slideshow ids={featuredEmployeeIds} photos={featuredEmployeePhotos} onHover={setHoveredPhotoIndex} />
             <EmployeeList employees={sortedEmployees} employeeToHighlight={featuredEmployeeIds[hoveredPhotoIndex]} />
         </Container>

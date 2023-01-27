@@ -66,11 +66,13 @@ const EmployeeForm = (props: EmployeeFormProps) => {
                 <label className="font-semibold mr-2">Photo</label>
                 <input className='border-2 w-full p-2' {...bindPhoto} type="text" required />
             </div>
-            <div className="mb-4 flex ">
+            <div className="mb-2 flex ">
                 <label className="font-semibold mr-2">Featured</label>
-                <input type="checkbox" checked={isFeatured} onChange={(e) => setIsFeatured(e.target.checked)} />
+                <input className="w-4 accent-dark-orange" type="checkbox" checked={isFeatured} onChange={(e) => setIsFeatured(e.target.checked)} />
             </div>
-            <Button label={props.action === "add" ? "Save" : "Update"} />
+            <div className="flex justify-end">
+                <Button label={props.action === "add" ? "Save" : "Update"} />
+            </div>
         </form>
     )
 }
