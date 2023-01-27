@@ -22,7 +22,6 @@ const EmployeeForm = (props: EmployeeFormProps) => {
             axios.post(`${import.meta.env.VITE_API_URL}/employees`, {
                 name: name,
                 photo: photo,
-                jobs: [],
                 featured: isFeatured,
                 created_at: Date.now()
             })

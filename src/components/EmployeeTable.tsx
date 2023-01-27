@@ -4,9 +4,17 @@ import useFetch from "../hooks/useFetch"
 import Button from "./Button"
 import Modal from "./Modal"
 
-const EmployeeList = () => {
+const EmployeeTable = () => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+    const [isJobsModalOpen, setIsJobsModalOpen] = useState(false)
     const [employeeToEdit, setEmployeeToEdit] = useState<Employee>({} as Employee)
+
+    const assignHandler = (employee: Employee) => {
+        console.log("ASSIGN!")
+        setEmployeeToEdit(employee)
+        setIsJobsModalOpen(true)
+    }
 
     const editHandler = (employee: Employee) => {
         console.log("EDIT!")
@@ -14,7 +22,13 @@ const EmployeeList = () => {
         setIsEditModalOpen(true)
     }
     
-    const deleteHandler = (id: number) => {
+    const deleteHandler = (employee: Employee) => {
+        console.log("DELETE")
+        setEmployeeToEdit(employee)
+        setIsDeleteModalOpen(true)
+    }
+    
+    const deleteEmployee = (id: number) => {
         axios.delete(`${import.meta.env.VITE_API_URL}/employees/${id}`)
         .then((res) => {
             console.log("deleted")
@@ -35,7 +49,9 @@ const EmployeeList = () => {
 
     return (
         <>
+            <Modal open={isJobsModalOpen} onClose={() => setIsJobsModalOpen(false)} title="Assign Jobs" employee={employeeToEdit} action="assign" />
             <Modal open={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} title="Edit Employee" employee={employeeToEdit} action="edit" />
+            <Modal open={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onDelete={() => deleteEmployee(employeeToEdit.id)} title="Delete Employee" employee={employeeToEdit} action="delete" />
 
             <table className="table-auto overflow-scroll md:w-full">
                 <thead className="bg-gray-50 border-b-2 border-gray-100 border-separate">
@@ -57,12 +73,14 @@ const EmployeeList = () => {
                                     {employee.name}
                                 </span>
                             </td>
-                            <td className="px-4 py-6">TEST</td>
+                            <td className="px-4 py-6">
+                                <Button label="Jobs" onClick={() => assignHandler(employee)} />
+                            </td>
                             <td className="px-4 py-6">
                                 <Button label="Edit" onClick={() => editHandler(employee)} />
                             </td>
                             <td className="px-4 py-6">
-                                <Button label="Delete" onClick={() => deleteHandler(employee.id)} />
+                                <Button label="Delete" onClick={() => deleteHandler(employee)} />
                             </td>
                         </tr>
                     ))}
@@ -72,4 +90,4 @@ const EmployeeList = () => {
     )
 }
 
-export default EmployeeList
+export default EmployeeTable

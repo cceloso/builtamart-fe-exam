@@ -3,7 +3,6 @@
     {
       "name": "Juana Dela Cruz",
       "photo": "https://www.newbalance.com.sg/dw/image/v2/AASX_PRD/on/demandware.static/-/Library-Sites-APAC/default/dw646c4c25/Greyday_IU_Hero_0510.jpg",
-      "jobs": [],
       "featured": true,
       "created_at": 123456,
       "id": 1
@@ -11,7 +10,6 @@
     {
       "name": "Maria Dela Cruz",
       "photo": "https://www.newbalance.com.sg/dw/image/v2/AASX_PRD/on/demandware.static/-/Library-Sites-APAC/default/dw646c4c25/Greyday_IU_Hero_0510.jpg",
-      "jobs": [],
       "featured": false,
       "created_at": 1674758569434,
       "id": 2
@@ -29,6 +27,18 @@
     {
       "id": 3,
       "name": "Operations Manager"
+    }
+  ],
+  "employeeJobs": [
+    {
+      "employeeId": 1,
+      "jobId": 1,
+      "id": 1
+    },
+    {
+      "employeeId": 2,
+      "jobId": 2,
+      "id": 2
     }
   ]
 }

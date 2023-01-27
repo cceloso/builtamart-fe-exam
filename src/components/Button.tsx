@@ -11,6 +11,8 @@ const Button = (props: ButtonProps) => {
         styles = "bg-green hover:bg-dark-green"
     } else if (props.label === "Delete") {
         styles = "bg-red hover:bg-dark-red"
+    } else if (props.label === "Cancel") {
+        styles = "bg-gray-200 hover:bg-gray-300 text-black"
     } else {
         styles = "bg-orange hover:bg-dark-orange"
     }
