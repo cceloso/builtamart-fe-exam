@@ -7,7 +7,7 @@ interface NavLinkProps {
 
 const NavLink = (props: NavLinkProps) => {
   return (
-    <li className="px-4 hover:text-orange transition duration-150 font-semibold">
+    <li className="px-4 hover:text-dark-orange transition duration-150 font-semibold">
         <Link to={props.link}>{props.label}</Link>
     </li>
   )

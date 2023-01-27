@@ -1,4 +1,3 @@
-import React from "react"
 import { Link } from "react-router-dom"
 import Logo from "../assets/builtamart-logo.avif"
 import Container from "./Container"

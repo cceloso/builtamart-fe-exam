@@ -8,7 +8,12 @@ module.exports = {
     extend: {
       colors: {
         "dark-charcoal": "#323233",
-        "orange": "#FE6632",
+        "orange": "#FF7C50",
+        "dark-orange": "#FE6632",
+        "green": "#72CC8A",
+        "dark-green": "#5FB075",
+        "red": "#D97564",
+        "dark-red": "#D6604B",
       }
     },
   },
