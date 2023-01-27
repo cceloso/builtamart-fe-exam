@@ -1,7 +1,10 @@
 import axios from "axios"
 import { useState } from "react"
 import useFetch from "../hooks/useFetch"
+import AssignJobsForm from "./AssignJobsForm"
 import Button from "./Button"
+import DeleteForm from "./DeleteForm"
+import EmployeeForm from "./EmployeeForm"
 import Modal from "./Modal"
 
 const EmployeeTable = () => {
@@ -49,9 +52,17 @@ const EmployeeTable = () => {
 
     return (
         <>
-            <Modal open={isJobsModalOpen} onClose={() => setIsJobsModalOpen(false)} title="Assign Jobs" employee={employeeToEdit} action="assign" />
-            <Modal open={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} title="Edit Employee" employee={employeeToEdit} action="edit" />
-            <Modal open={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onDelete={() => deleteEmployee(employeeToEdit.id)} title="Delete Employee" employee={employeeToEdit} action="delete" />
+            <Modal open={isJobsModalOpen} onClose={() => setIsJobsModalOpen(false)} title="Assign Jobs">
+                <AssignJobsForm employee={employeeToEdit} />
+            </Modal>
+            
+            <Modal open={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} title="Edit Employee">
+                <EmployeeForm initialName={employeeToEdit.name ? employeeToEdit.name : ""} initialPhoto={employeeToEdit.photo ? employeeToEdit.photo : ""} initialFeatured={employeeToEdit.featured ? employeeToEdit.featured : false} action="edit" employee={employeeToEdit} onClose={() => setIsEditModalOpen(false)} />
+            </Modal>
+            
+            <Modal open={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} title="Delete Employee">
+                <DeleteForm type="employee" onClose={() => setIsDeleteModalOpen(false)} onDelete={() => deleteEmployee(employeeToEdit.id)} />
+            </Modal>
 
             <table className="table-auto overflow-scroll md:w-full">
                 <thead className="bg-gray-50 border-b-2 border-gray-100 border-separate">

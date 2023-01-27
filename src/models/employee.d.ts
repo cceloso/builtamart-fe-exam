@@ -6,8 +6,6 @@ type Employee = {
     created_at: string
 }
 
-type Employees = Employee[]
-
 type EmployeeJob = {
     id: number,
     employeeId: number,

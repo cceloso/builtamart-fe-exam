@@ -1,17 +1,12 @@
 interface ModalProps {
     open: boolean
     onClose: () => void
-    onDelete?: () => void
     title: string
-    employee?: Employee
-    action: string
+    children?: React.ReactNode
 }
 
 import { Dialog } from '@headlessui/react'
-import EmployeeForm from './EmployeeForm'
 import { XMarkIcon } from "@heroicons/react/24/outline"
-import JobsForm from './JobsForm'
-import DeleteForm from './DeleteForm'
 
 const Modal = (props: ModalProps) => {
     return (
@@ -24,17 +19,7 @@ const Modal = (props: ModalProps) => {
                         <XMarkIcon className="w-6" role="button" onClick={props.onClose} />
                     </Dialog.Title>
 
-                    {props.action === "assign" &&
-                        <JobsForm employee={props.employee} />
-                    }
-
-                    {(props.action === "add" || props.action === "edit") &&
-                        <EmployeeForm initialName={props.employee?.name ? props.employee.name : ""} initialPhoto={props.employee?.photo ? props.employee.photo : ""} initialFeatured={props.employee?.featured ? props.employee?.featured : false} action={props.action} employee={props.employee} onClose={props.onClose} />
-                    }
-                    
-                    {props. action === "delete" &&
-                        <DeleteForm type="employee" onClose={props.onClose} onDelete={props.onDelete} />
-                    }
+                    {props.children}
                 </Dialog.Panel>
             </div>
         </Dialog>

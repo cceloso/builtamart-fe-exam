@@ -4,7 +4,7 @@ interface EmployeeFormProps {
     initialFeatured: boolean
     action: string
     employee?: Employee
-    onClose: (value: boolean) => void
+    onClose: () => void
 }
 
 import axios from 'axios'
@@ -58,23 +58,21 @@ const EmployeeForm = (props: EmployeeFormProps) => {
     }
 
     return (
-        <div>
-            <form onSubmit={submitHandler}>
-                <div className="mb-4">
-                    <label className="font-semibold mr-2">Name</label>
-                    <input className='border-2 w-full p-2' {...bindName} type="text" />
-                </div>
-                <div className="mb-4">
-                    <label className="font-semibold mr-2">Photo</label>
-                    <input className='border-2 w-full p-2' {...bindPhoto} type="text" />
-                </div>
-                <div className="mb-4 flex ">
-                    <label className="font-semibold mr-2">Featured</label>
-                    <input type="checkbox" checked={isFeatured} onChange={(e) => setIsFeatured(e.target.checked)} />
-                </div>
-                <Button label={props.action === "add" ? "Save" : "Update"} />
-            </form>
-        </div>
+        <form onSubmit={submitHandler}>
+            <div className="mb-4">
+                <label className="font-semibold mr-2">Name</label>
+                <input className='border-2 w-full p-2' {...bindName} type="text" required />
+            </div>
+            <div className="mb-4">
+                <label className="font-semibold mr-2">Photo</label>
+                <input className='border-2 w-full p-2' {...bindPhoto} type="text" required />
+            </div>
+            <div className="mb-4 flex ">
+                <label className="font-semibold mr-2">Featured</label>
+                <input type="checkbox" checked={isFeatured} onChange={(e) => setIsFeatured(e.target.checked)} />
+            </div>
+            <Button label={props.action === "add" ? "Save" : "Update"} />
+        </form>
     )
 }
 
