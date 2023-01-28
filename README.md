@@ -16,5 +16,5 @@ npm i
 
 3. Run the React application and JSON server
 ```
-npm run dev --host
+npm run dev
 ```
