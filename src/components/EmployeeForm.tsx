@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react'
-import useInput from '../hooks/useInput'
 import { addEmployee, editEmployee } from '../services/employee.service'
 import Button from './Button'
 
