@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Button from '../components/Button'
 import Container from '../components/Container'
-import JobsForm from '../components/JobsForm'
+import JobForm from '../components/JobForm'
 import JobTable from '../components/JobTable'
 import Modal from '../components/Modal'
 
@@ -15,7 +15,7 @@ const Jobs = () => {
     return (
         <Container styles="py-6">
             <Modal open={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} title="Add Job">
-                <JobsForm action="add" onClose={() => setIsAddModalOpen(false)} />
+                <JobForm action="add" onClose={() => setIsAddModalOpen(false)} />
             </Modal>
 
             <div className="flex items-center justify-between mb-6">

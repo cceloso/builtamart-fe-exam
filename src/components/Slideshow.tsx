@@ -9,27 +9,17 @@ interface SlideshowProps {
 const Slideshow = (props: SlideshowProps) => {
     const [currentIndex, setCurrentIndex] = useState(0)
     const timer = useRef<ReturnType<typeof setInterval> | null>(null)
-    
-    const slideLeft = () => {
-        const isFirstSlide = currentIndex === 0
-        const newIndex = isFirstSlide ? props.photos.length - 1 : currentIndex - 1
-        setCurrentIndex(newIndex)
-    }
-
-    const moveToNextSlide = () => {
-        const isLastSlide = currentIndex === props.photos.length - 1
-        const newIndex = isLastSlide ? 0 : currentIndex + 1
-        setCurrentIndex(newIndex)
-    }
 
     const startSlideshow = () => {
         timer.current = setInterval(() => {
-            moveToNextSlide()
+            const isLastSlide = currentIndex === props.photos.length - 1
+            const newIndex = isLastSlide ? 0 : currentIndex + 1
+            setCurrentIndex(newIndex)
             props.onHover(-1)
         }, 5000)
     }
     
-    const stopSlideshow = () => {
+    const pauseSlideshow = () => {
         if (timer.current) {
             clearInterval(timer.current)
         }
@@ -37,7 +27,7 @@ const Slideshow = (props: SlideshowProps) => {
     
     const mouseEnterHandler = () => {
         props.onHover(currentIndex)
-        stopSlideshow()
+        pauseSlideshow()
     }
 
     const mouseLeaveHandler = () => {
@@ -49,7 +39,7 @@ const Slideshow = (props: SlideshowProps) => {
         startSlideshow()
       
         return () => {
-            stopSlideshow()
+            pauseSlideshow()
         }
     }, [currentIndex])
 

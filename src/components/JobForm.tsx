@@ -8,10 +8,12 @@ interface EmployeeFormProps {
     onClose: () => void
 }
 
-const JobsForm = (props: EmployeeFormProps) => {
+const JobForm = (props: EmployeeFormProps) => {
     const [name, setName] = useState(props.job ? props.job.name : "")
 
     const submitHandler = async (e: React.FormEvent) => {
+        e.preventDefault()
+
         let res
 
         if (props.action === "add") {
@@ -23,6 +25,7 @@ const JobsForm = (props: EmployeeFormProps) => {
         if (res) {
             setName("")
             props.onClose()
+            window.location.reload()
         }
     }
 
@@ -39,4 +42,4 @@ const JobsForm = (props: EmployeeFormProps) => {
     )
 }
 
-export default JobsForm
+export default JobForm

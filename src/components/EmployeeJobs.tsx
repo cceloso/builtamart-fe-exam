@@ -24,7 +24,9 @@ const EmployeeJobs = (props: EmployeeJobsProps) => {
 
     return (
         <div>
-            {employeeJobs && employeeJobs.map((job) => (
+            {employeeJobs.length === 0 && <p className="text-sm truncate italic">No assigned job</p>}
+            
+            {employeeJobs.length > 0 && employeeJobs.map((job) => (
                 <p className="text-sm truncate w-72" key={job.id}>{job.name}</p>
             ))}
         </div>

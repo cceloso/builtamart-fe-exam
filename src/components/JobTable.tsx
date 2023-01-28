@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import Button from "./Button"
 import DeleteForm from "./DeleteForm"
-import JobsForm from "./JobsForm"
+import JobForm from "./JobForm"
 import Modal from "./Modal"
 import { getJobs, deleteJob } from "../services/job.service"
 import { getEmployeeJobs } from "../services/employeeJob.service"
 import Spinner from "./Spinner"
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid"
+import ErrorMessage from "./ErrorMessage"
 
 const JobTable = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -56,7 +57,7 @@ const JobTable = () => {
     return (
         <>
             <Modal open={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} title="Edit Job">
-                <JobsForm job={jobToEdit} action="edit" onClose={() => setIsEditModalOpen(false)} />
+                <JobForm job={jobToEdit} action="edit" onClose={() => setIsEditModalOpen(false)} />
             </Modal>
 
             <Modal open={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} title="Delete Employee">
@@ -87,20 +88,22 @@ const JobTable = () => {
                         </thead>
                         <tbody>
                             {jobs.map((job: Job) => (
-                                <tr className="border-b-2 border-gray-100 border-separate" key={job.id}>
-                                    <td className="px-4 py-5">{job.id}</td>
-                                    <td className="px-4 py-5">{job.name}</td>
-                                    <td className="px-4 py-5">{employeeJobs.filter((employeeJob) => employeeJob.jobId === job.id).length}</td>
-                                    <td className="px-4 py-5">
+                                <tr className="border-b-2 border-gray-100 border-separate even:bg-gray-50" key={job.id}>
+                                    <td className="p-4">{job.id}</td>
+                                    <td className="p-4">{job.name}</td>
+                                    <td className="p-4">{employeeJobs.filter((employeeJob) => employeeJob.jobId === job.id).length}</td>
+                                    <td className="p-4">
                                         <Button label="Edit" onClick={() => editHandler(job)} />
                                     </td>
-                                    <td className="px-4 py-5">
+                                    <td className="p-4">
                                         <Button label="Delete" onClick={() => deleteHandler(job)} disabled={employeeJobs.filter((employeeJob) => employeeJob.jobId === job.id).length > 0} />
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
+                    
+                    {!isLoading && jobs.length === 0 && <ErrorMessage message="No jobs to display. Add a job first" />}
                 </div>
             }
         </>

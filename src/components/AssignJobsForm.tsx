@@ -76,8 +76,10 @@ const AssignJobsForm = (props: AssignJobsFormProps) => {
             {isLoading && <Spinner />}
 
             {isError && <ErrorMessage message="There was an error in loading jobs. Please try again." />}
+
+            {!isLoading && jobs.length === 0 && <ErrorMessage message="No jobs to assign. Add a job first" />}
             
-            {jobs && employeeJobs && 
+            {jobs.length > 0 && employeeJobs && 
                 jobs.map((job: Job) => (
                     <div className="flex items-center justify-between mb-4">
                         <p className="overflow-hidden truncate w-64">{job.name}</p>

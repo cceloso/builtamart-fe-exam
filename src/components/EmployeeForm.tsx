@@ -19,6 +19,8 @@ const EmployeeForm = (props: EmployeeFormProps) => {
     const [isFeatured, setIsFeatured] = useState(props.initialFeatured)
 
     const submitHandler = async (e: React.FormEvent) => {
+        e.preventDefault()
+
         let res
 
         if (props.action === "add") {
@@ -31,6 +33,7 @@ const EmployeeForm = (props: EmployeeFormProps) => {
             setName("")
             setPhoto("")
             props.onClose()
+            window.location.reload()
         }
     }
 
@@ -41,8 +44,8 @@ const EmployeeForm = (props: EmployeeFormProps) => {
                 <input className='border-2 w-full p-2' value={name} onChange={(e) => setName(e.target.value)} type="text" required />
             </div>
             <div className="mb-4">
-                <label className="font-semibold mr-2">Photo</label>
-                <input className='border-2 w-full p-2' value={photo} onChange={(e) => setPhoto(e.target.value)} type="text" required />
+                <label className="font-semibold mr-2">Photo URL</label>
+                <input className='border-2 w-full p-2' value={photo} onChange={(e) => setPhoto(e.target.value)} type="url" pattern="https://.*" required />
             </div>
             <div className="mb-2 flex ">
                 <label className="font-semibold mr-2">Featured</label>

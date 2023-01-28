@@ -7,8 +7,8 @@ interface EmployeeListProps {
 
 const EmployeeList = (props: EmployeeListProps) => {
     return (
-        <div className="mt-4 overflow-hidden">
-            <h1 className="px-4 py-2 font-bold text-lg">Employee Catalog</h1>
+        <div className="overflow-hidden">
+            <h1 className="px-4 py-2 uppercase font-bold text-lg">Employee Catalog</h1>
             {props.employees.map((employee) => (
                 <div className={`border-b-2 px-4 py-3 flex transition duration-300 ${props.employeeToHighlight === employee.id ? "bg-light-orange" : ""}`} key={employee.id}>
                     <div className="flex flex-col md:flex-row">

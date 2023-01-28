@@ -16,7 +16,7 @@ const Modal = (props: ModalProps) => {
             <div className="fixed inset-0 flex items-center justify-center p-4">
                 <Dialog.Panel className="w-full max-w-sm rounded bg-white border-2 border-gray-200 flex flex-col justify-center p-6">
                     <Dialog.Title className="font-bold text-lg mb-4 flex items-center justify-between">
-                        <h1>{props.title}</h1>
+                        <p>{props.title}</p>
                         <XMarkIcon className="w-6" role="button" onClick={props.onClose} />
                     </Dialog.Title>
                     {props.children}
